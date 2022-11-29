@@ -16,6 +16,7 @@
     "typescript": "^4.9.3",
     "web-vitals": "^2.1.4"
   },
+  "proxy": "https://query1.finance.yahoo.com/v7/finance/download",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
