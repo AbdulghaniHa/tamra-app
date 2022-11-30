@@ -1,4 +1,5 @@
 import { useEffect, createRef } from "react"
+import { getSMA } from "../calculation/TA/getSMA"
 
 declare const LightweightCharts: any;
 
@@ -19,6 +20,7 @@ type Props = {
   height: number;
   candlesData: DataType;
   smaVisible: boolean;
+  smaRange: number;
   children?: never;
 };
 
@@ -53,6 +55,11 @@ const RenderChart = (props: Props) => {
             const chart = LightweightCharts.createChart(ref.current ,chartProperties);
             const candleSeries = chart.addCandlestickSeries();
             candleSeries.setData(props.candlesData);
+
+            const smaSeries = chart.addLineSeries({ color: 'blue', lineWidth: 1.5, pane: 0 , width: 1200, height: 150});
+            const smaData = getSMA(props.candlesData, props.smaRange)
+            smaSeries.setData(smaData);
+
         }
       }
       ref.current.appendChild(script);
