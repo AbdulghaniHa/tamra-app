@@ -18,7 +18,7 @@ type CandlesType = Candles[];
 
 
 function Dashboard() {
-    console.log(useViewport())
+
     const { width, height } = useViewport();
     const [historicalData, setHistoricalData] = useState<CandlesType>()
     const [ timeframe, setTimeframe] = useState("1d")
@@ -91,30 +91,6 @@ function Dashboard() {
                 </div>
 
                 <div className="flex flex-col w-full">
-                    <label className="self-start font-semibold">From</label>
-                    <div className="bg-white shadow-lg rounded-md">
-                        {/* Date From */}
-                        <input type="text" placeholder="Year" className="py-1 px-2 ml-2 w-14 h-14 focus:outline-none border-0 rounded-md" onChange={(v) => setFromYear(v.currentTarget.value)}/>
-                        <input type="text" placeholder="/" disabled={true} className="bg-white py-1 w-8 md:w-3 h-14 focus:outline-none border-0 rounded-md text-center"/>
-                        <input type="text" placeholder="Month" className="py-1 px-2 ml-2 w-16 h-14 focus:outline-none border-0 rounded-md" onChange={(v) => setFromMonth(v.currentTarget.value)}/>
-                        <input type="text" placeholder="/" disabled={true} className="bg-white py-1 w-8 md:w-3 h-14 focus:outline-none border-0 rounded-md text-center"/>
-                        <input type="text" placeholder="Day" className="py-1 px-2 ml-2 w-16 h-14 focus:outline-none border-0 rounded-md" onChange={(v) => setFromDay(v.currentTarget.value)}/>
-                    </div>
-                </div>
-
-                <div className="flex flex-col w-full">
-                    <label className="self-start font-semibold">To</label>
-                    <div className="bg-white shadow-lg rounded-md w-auto">
-                        {/* Date To */}
-                        <input type="text" placeholder="Year" className="py-1 px-2 ml-2 w-14 h-14 focus:outline-none border-0 rounded-md" onChange={(v) => setToYear(v.currentTarget.value)}/>
-                        <input type="text" placeholder="/" disabled={true} className="bg-white py-1 w-8 h-14 focus:outline-none border-0 rounded-md text-center"/>
-                        <input type="text" placeholder="Month" className="py-1 px-2 ml-2 w-16 h-14 focus:outline-none border-0 rounded-md" onChange={(v) => setToMonth(v.currentTarget.value)}/>
-                        <input type="text" placeholder="/" disabled={true} className="bg-white py-1 w-8 h-14 focus:outline-none border-0 rounded-md text-center"/>
-                        <input type="text" placeholder="Day" className="py-1 px-2 ml-2 w-16 h-14 focus:outline-none border-0 rounded-md" onChange={(v) => setToDay(v.currentTarget.value)}/>
-                    </div>
-                </div>
-
-                <div className="flex flex-col w-full">
                     <div className="self-start font-semibold">Technical Indicator</div>
                     <div className="flex bg-white text-gray-500 opacity-75 p-2 rounded-md shadow-lg divide-x divide-gray-400 text-center h-14 justify-center">
                         <div className={`hover:font-bold cursor-pointer self-center w-20 ${visibleSMA? "font-bold text-black opacity-100" : ""}`} onClick={() => setVisibleSMA(!visibleSMA)}>SMA</div>
@@ -122,6 +98,29 @@ function Dashboard() {
                     </div>
                 </div>
 
+                <div className="flex flex-col w-full">
+                    <label className="self-start font-semibold">From</label>
+                    <div className="bg-white shadow-lg rounded-md">
+                        {/* Date From */}
+                        <input type="text" placeholder="2021" className="py-1 px-2 ml-2 w-14 h-14 focus:outline-none border-0 rounded-md" onChange={(v) => setFromYear(v.currentTarget.value)}/>
+                        <input type="text" placeholder="/" disabled={true} className="bg-white py-1 w-8 md:w-3 h-14 focus:outline-none border-0 rounded-md text-center"/>
+                        <input type="text" placeholder="12" className="py-1 px-2 ml-2 w-16 h-14 focus:outline-none border-0 rounded-md" onChange={(v) => setFromMonth(v.currentTarget.value)}/>
+                        <input type="text" placeholder="/" disabled={true} className="bg-white py-1 w-8 md:w-3 h-14 focus:outline-none border-0 rounded-md text-center"/>
+                        <input type="text" placeholder="01" className="py-1 px-2 ml-2 w-16 h-14 focus:outline-none border-0 rounded-md" onChange={(v) => setFromDay(v.currentTarget.value)}/>
+                    </div>
+                </div>
+
+                <div className="flex flex-col w-full">
+                    <label className="self-start font-semibold">To</label>
+                    <div className="bg-white shadow-lg rounded-md w-auto">
+                        {/* Date To */}
+                        <input type="text" placeholder="2022" className="py-1 px-2 ml-2 w-14 h-14 focus:outline-none border-0 rounded-md" onChange={(v) => setToYear(v.currentTarget.value)}/>
+                        <input type="text" placeholder="/" disabled={true} className="bg-white py-1 w-8 h-14 focus:outline-none border-0 rounded-md text-center"/>
+                        <input type="text" placeholder="12" className="py-1 px-2 ml-2 w-16 h-14 focus:outline-none border-0 rounded-md" onChange={(v) => setToMonth(v.currentTarget.value)}/>
+                        <input type="text" placeholder="/" disabled={true} className="bg-white py-1 w-8 h-14 focus:outline-none border-0 rounded-md text-center"/>
+                        <input type="text" placeholder="01" className="py-1 px-2 ml-2 w-16 h-14 focus:outline-none border-0 rounded-md" onChange={(v) => setToDay(v.currentTarget.value)}/>
+                    </div>
+                </div>
 
                 <div className="flex flex-col w-full">
                     <label className="self-start opacity-0">.</label>
