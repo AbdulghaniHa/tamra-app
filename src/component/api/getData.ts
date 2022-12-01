@@ -9,8 +9,11 @@ interface Props {
 
 export async function getData(props: Props) {
 
-    const res = await fetch(`/${props.ticker}?period1=${props.from_timestamp}&period2=${props.to_timestamp}&interval=${props.interval}&events=history&crumb=5YTX%2FgVGBmg`)
-
+    // This will request a proxy server to avoid CORS error when deployed to production
+    const yahooFinanceUrl = `https://query1.finance.yahoo.com/v7/finance/download/${props.ticker}?period1=${props.from_timestamp}&period2=${props.to_timestamp}&interval=${props.interval}&events=history`
+    const url = `https://proxy.abdulghaniha.repl.co/getData?query=${yahooFinanceUrl}`
+    const res = await fetch(url)
+    
     // Check if status 200
     if (res.status === 200) {
         let text_data = await res.text()
