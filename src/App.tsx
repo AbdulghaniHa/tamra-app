@@ -1,11 +1,9 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Dashboard from './component/UI/Dashboard';
 
 function App() {
   return (
-    <div className="App">
-
+    <div className="bg-background h-screen">
+      <Dashboard />
     </div>
   );
 }
