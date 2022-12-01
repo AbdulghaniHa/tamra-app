@@ -1,4 +1,4 @@
-import { useEffect, createRef } from "react"
+import { useEffect, createRef, useState } from "react"
 import { getSMA } from "../calculation/TA/getSMA"
 
 declare const LightweightCharts: any;
@@ -27,6 +27,10 @@ type Props = {
 const RenderChart = (props: Props) => {
 
   let containerId = "advanced-chart-widget-container";
+  const [high, setHigh] = useState(0)
+  const [low, setLow] = useState(0)
+  const [close, setClose] = useState(0)
+  const [open, setOpen] = useState(0)
 
   const ref: {current: HTMLDivElement | null} = createRef();
   useEffect(() => {
@@ -56,10 +60,22 @@ const RenderChart = (props: Props) => {
             const candleSeries = chart.addCandlestickSeries();
             candleSeries.setData(props.candlesData);
 
-            const smaSeries = chart.addLineSeries({ color: 'blue', lineWidth: 1.5, pane: 0 , width: 1200, height: 150});
-            const smaData = getSMA(props.candlesData, props.smaRange)
-            smaSeries.setData(smaData);
+            if (props.smaVisible) {
+              const smaSeries = chart.addLineSeries({ color: 'blue', lineWidth: 1.5, pane: 0 , width: 1200, height: 150});
+              const smaData = getSMA(props.candlesData, props.smaRange)
+              smaSeries.setData(smaData);
+            }
 
+            // OHLC Values:
+            chart.subscribeCrosshairMove((param: any) => {
+              const ohlc = param.seriesPrices.get(candleSeries)
+              if (ohlc) {
+                setHigh(Math.round(ohlc.high * 100) / 100)
+                setClose(Math.round(ohlc.close * 100) / 100)
+                setLow(Math.round(ohlc.low * 100) / 100)
+                setOpen(Math.round(ohlc.open * 100) / 100)
+              }
+            })
         }
       }
       ref.current.appendChild(script);
@@ -74,7 +90,7 @@ const RenderChart = (props: Props) => {
     }
   }, [props.candlesData]);
 
-  return <div id={containerId} ref={ref} className="grid place-items-center" />;
+  return <><div className="bg-white w-screen">Open: {open} | High: {high} | Low: {low} | Close: {close}</div><div id={containerId} ref={ref} className="grid place-items-center" /></>;
 }
 
 export default RenderChart;
