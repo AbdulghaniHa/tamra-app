@@ -54,12 +54,25 @@ const useViewport = (): UseViewPortResult => {
       }
 
     }
-    else {
+    else if (width <= 1400) {
       return {
         width: 1200,
         height: 600
       }
     }
+    else if (width <= 1920) {
+      return {
+        width: 1300,
+        height: 600
+      }
+    }
+    else {
+      return {
+        width: 1760,
+        height: 1000
+      }
+    }
+
   }, [width]);
 
   return { width, height, breakpoint };
