@@ -56,7 +56,7 @@ const RenderChart = (props: Props) => {
             },
             pane: 0,
           }
-            
+
             const chart = LightweightCharts.createChart(ref.current ,chartProperties);
             const candleSeries = chart.addCandlestickSeries();
             candleSeries.setData(props.candlesData);
@@ -97,7 +97,7 @@ const RenderChart = (props: Props) => {
     }
   }, [props.candlesData]);
 
-  return <><div className="bg-white w-screen">Open: {open} | High: {high} | Low: {low} | Close: {close}</div><div id={containerId} ref={ref} className="grid place-items-center" /></>;
+  return <div className="grid place-items-center"><div className={`bg-white w-[${props.width} px]`}>Open: {open} | High: {high} | Low: {low} | Close: {close}</div><div id={containerId} ref={ref} /></div>;
 }
 
 export default RenderChart;
