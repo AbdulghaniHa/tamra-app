@@ -18,12 +18,13 @@ type CandlesType = Candles[];
 
 
 function Dashboard() {
+    console.log(useViewport())
     const { width, height } = useViewport();
     const [historicalData, setHistoricalData] = useState<CandlesType>()
-    const [ timeframe, setTimeframe] = useState("")
-    const [ timeFrom, setTimeFrom] = useState("")
-    const [ timeTo, setTimeTo] = useState("")
-    const [ ticker, setTicker] = useState("GOOG")
+    const [ timeframe, setTimeframe] = useState("1d")
+    const [ timeFrom, setTimeFrom] = useState("1638317770")
+    const [ timeTo, setTimeTo] = useState("1669853770")
+    const [ ticker, setTicker] = useState("AAPL")
     const [ visibleSMA, setVisibleSMA] = useState(false)
     const [ visibleRSI, setVisibleRSI] = useState(false)
     const [ loading, setLoading] = useState("")
@@ -74,7 +75,7 @@ function Dashboard() {
                 <div className="flex flex-col">
                     <label className="self-start font-semibold">Ticker</label>
                     <div className="bg-white shadow-lg rounded-md">
-                        <input type="text" placeholder="Stock symbol: GOOG" className="py-1 px-2 ml-2 w-48 h-14 focus:outline-none border-0 rounded-md" onChange={(e) => setTicker(e.currentTarget.value)}/>
+                        <input type="text" placeholder="Stock symbol: AAPL" className="py-1 px-2 ml-2 w-48 h-14 focus:outline-none border-0 rounded-md" onChange={(e) => setTicker(e.currentTarget.value)}/>
                     </div>
                 </div>
 
@@ -131,7 +132,7 @@ function Dashboard() {
             </div>
         {
             !historicalData? error:
-            <RenderChart width={width} height={height} candlesData={historicalData || []} smaVisible={visibleSMA} rsiVisible={visibleRSI} smaRange={20}/>
+            <RenderChart width={width} height={height} candlesData={historicalData || []} smaVisible={visibleSMA} rsiVisible={visibleRSI} smaRange={20} stock={ticker}/>
         }
         </div>
     </>
