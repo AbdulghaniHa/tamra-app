@@ -4,13 +4,20 @@ import { singletonHook } from "react-singleton-hook";
 interface UseViewPortResult {
   width: number;
   height: number;
-  breakpoint: "sm" | "md";
+  breakpoint: {
+    width: number,
+    height: number
+  };
 }
 
 const initialResult: UseViewPortResult = {
   width: 375,
   height: 667,
-  breakpoint: "sm",
+  breakpoint: {
+    width: 360,
+    height: 340
+  }
+,
 };
 
 const useViewport = (): UseViewPortResult => {
@@ -29,11 +36,29 @@ const useViewport = (): UseViewPortResult => {
 
   const breakpoint = useMemo(() => {
     if (width <= 600) {
-      return "sm";
+      return {
+        width: 360,
+        height: 340
+      }
+
     } else if (width <= 900) {
-      return "md";
-    } else {
-      return "md";
+      return {
+        width: 730,
+        height: 400
+      }
+
+    } else if (width <= 1200) {
+      return {
+        width: 900,
+        height: 550
+      }
+
+    }
+    else {
+      return {
+        width: 1200,
+        height: 600
+      }
     }
   }, [width]);
 
