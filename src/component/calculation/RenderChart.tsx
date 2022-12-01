@@ -1,5 +1,6 @@
 import { useEffect, createRef, useState } from "react"
 import { getSMA, getRSI } from "../calculation/TA"
+import useViewport from "../hooks/useViewport"
 
 declare const LightweightCharts: any;
 
@@ -22,11 +23,12 @@ type Props = {
   smaVisible: boolean;
   rsiVisible: boolean;
   smaRange: number;
+  stock: string;
   children?: never;
 };
 
 const RenderChart = (props: Props) => {
-
+  const { width, height, breakpoint } = useViewport();
   let containerId = "advanced-chart-widget-container";
   const [high, setHigh] = useState(0)
   const [low, setLow] = useState(0)
@@ -43,9 +45,10 @@ const RenderChart = (props: Props) => {
       script.async = true;
       script.onload = () => {
         if (typeof LightweightCharts !== "undefined") {
+
         const chartProperties = {
-            width:props.width,
-            height:props.height,
+            width:breakpoint.width.toString(),
+            height: breakpoint.height.toString(),
             crosshair: {
                 mode: LightweightCharts.CrosshairMode.Normal
             },
@@ -97,7 +100,16 @@ const RenderChart = (props: Props) => {
     }
   }, [props.candlesData]);
 
-  return <div className="grid place-items-center"><div className={`bg-white w-[${props.width} px]`}>Open: {open} | High: {high} | Low: {low} | Close: {close}</div><div id={containerId} ref={ref} /></div>;
+  return <div className="grid place-items-center">
+          <div className={`bg-white lg:w-[1200px] md:w-[730px] w-[360px]`}>
+            <div className="text-center font-bold py-2 text-lg flex">
+              <div className="m-auto w-full">Selected Stock: {props.stock}</div>
+              <img className="h-14 m-3" src="./logo.svg" alt="" />
+            </div>
+            <div>Open: {open} | High: {high} | Low: {low} | Close: {close}</div>
+          </div>
+          <div id={containerId} ref={ref} />
+        </div>;
 }
 
 export default RenderChart;
