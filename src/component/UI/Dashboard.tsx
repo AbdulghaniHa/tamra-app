@@ -69,7 +69,7 @@ function Dashboard() {
     return (
     <>
         <div className="">
-            <div className="py-10 grid place-items-center lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6 md:gap-4 px-8 md:px-20 ">
+            <div className="py-10 grid place-items-center lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6 md:gap-4 px-8 md:px-20 xl:px-30 2xl:px-80">
 
                 <div className="w-full">
                 <div className="flex flex-col">
@@ -130,7 +130,7 @@ function Dashboard() {
                 </div>
             </div>
         {
-            !historicalData? error:
+            !historicalData? <div className="grid place-items-center font-bold text-lg">{error}</div>:
             <RenderChart width={width} height={height} candlesData={historicalData || []} smaVisible={visibleSMA} rsiVisible={visibleRSI} smaRange={20} stock={ticker}/>
         }
         </div>
