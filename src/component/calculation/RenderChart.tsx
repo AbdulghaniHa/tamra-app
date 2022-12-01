@@ -1,5 +1,5 @@
 import { useEffect, createRef, useState } from "react"
-import { getSMA } from "../calculation/TA/getSMA"
+import { getSMA, getRSI } from "../calculation/TA"
 
 declare const LightweightCharts: any;
 
@@ -20,6 +20,7 @@ type Props = {
   height: number;
   candlesData: DataType;
   smaVisible: boolean;
+  rsiVisible: boolean;
   smaRange: number;
   children?: never;
 };
@@ -64,6 +65,12 @@ const RenderChart = (props: Props) => {
               const smaSeries = chart.addLineSeries({ color: 'blue', lineWidth: 1.5, pane: 0 , width: 1200, height: 150});
               const smaData = getSMA(props.candlesData, props.smaRange)
               smaSeries.setData(smaData);
+            }
+
+            if (props.rsiVisible) {
+              const rsiSeries = chart.addLineSeries({ color: 'black', lineWidth: 1, pane: 1 , width: 1200, height: 150});
+              const rsiData = getRSI(props.candlesData)
+              rsiSeries.setData(rsiData);
             }
 
             // OHLC Values:
