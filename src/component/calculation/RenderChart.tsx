@@ -101,7 +101,7 @@ const RenderChart = (props: Props) => {
   }, [props.candlesData]);
 
   return <div className="grid place-items-center">
-          <div className={`bg-white lg:w-[1200px] md:w-[730px] w-[360px]`}>
+          <div className={`bg-white 2xl:w-[1760px] xl:w-[1300px] lg:w-[1200px] md:w-[730px] w-[360px]`}>
             <div className="text-center font-bold py-2 text-lg flex">
               <div className="m-auto w-full">Selected Stock: {props.stock}</div>
               <img className="h-14 m-3" src="./logo.svg" alt="" />
